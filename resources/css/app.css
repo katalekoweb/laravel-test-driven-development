@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    table {
+        @apply border border-gray-100;
+    }
+
+    thead {
+        @apply bg-gray-200;
+    }
+
+    tr {
+        @apply border-b border-gray-200;
+    }
+
+    td, th {
+        @apply p-2 text-left;
+    }
+}
