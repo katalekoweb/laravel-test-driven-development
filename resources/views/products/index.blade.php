@@ -15,6 +15,7 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Price</th>
+                                    <th>Price (Eur)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -22,10 +23,11 @@
                                     <tr>
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $product->price }}</td>
+                                        <td>{{ $product->price_euro }}</td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="2" class="text-center">
+                                        <td colspan="3" class="text-center">
                                             {{ __('No records found') }}
                                         </td>
                                     </tr>
