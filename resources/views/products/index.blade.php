@@ -15,15 +15,15 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Price</th>
-                                    <th>Price (Eur)</th>
+                                    <th>Price (Euro)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse ($products as $product)
                                     <tr>
                                         <td>{{ $product->name }}</td>
-                                        <td>{{ $product->price }}</td>
-                                        <td>{{ $product->price_euro }}</td>
+                                        <td>$ {{ $product->price }}</td>
+                                        <td>$ {{ $product->price_euro }}</td>
                                     </tr>
                                 @empty
                                     <tr>

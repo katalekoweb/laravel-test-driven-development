@@ -4,7 +4,7 @@
 
 @layer components {
     table {
-        @apply border border-gray-100;
+        @apply border border-gray-300;
     }
 
     thead {

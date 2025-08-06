@@ -14,6 +14,6 @@ class CurrencyTest extends TestCase {
 
     public function test_convert_usd_to_gbp_zero() {
         $result = (new CurrencyService)->convert(0, 'usd', 'gbp');
-        $this->assertEquals(98, $result);
+        $this->assertEquals(0, $result);
     }
 }

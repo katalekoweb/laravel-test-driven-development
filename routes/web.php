@@ -4,8 +4,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', "/products");
-Route::resource('products', ProductController::class);
+Route::redirect('/', "/login");
+Route::resource('products', ProductController::class)->middleware('auth');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
