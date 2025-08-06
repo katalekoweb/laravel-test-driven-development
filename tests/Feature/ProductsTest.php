@@ -17,7 +17,7 @@ class ProductsTest extends TestCase
     public function test_home_page_contains_empty_table(): void
     {
         // arrange
-        $user = User::factory()->create();
+        $user = $this->createUser();
 
         // act
         $response = $this->actingAs($user)->get('/products');
@@ -29,7 +29,7 @@ class ProductsTest extends TestCase
     public function test_home_page_contains_non_empty_table(): void
     {
         // arrange
-        $user = User::factory()->create();
+        $user = $this->createUser();
         $product = Product::query()->create([
             "name" => "Product 1",
             "price" => 100
@@ -49,7 +49,7 @@ class ProductsTest extends TestCase
     public function test_paginated_products_table_doesnt_contains_11th_records()
     {
         // arrange
-        $user = User::factory()->create();
+        $user = $this->createUser();
         $products = Product::factory(11)->create();
         $lastProduct = $products->last();
 
@@ -61,5 +61,9 @@ class ProductsTest extends TestCase
         $response->assertViewHas('products', function ($collection) use ($lastProduct) {
             return !$collection->contains($lastProduct);
         });
+    }
+
+    private function createUser () {
+        return User::factory()->create();
     }
 }
