@@ -14,13 +14,20 @@ class ProductsTest extends TestCase
 {
     use RefreshDatabase;
 
+    public User $user;
+
+    protected function setUp (): void {
+        parent::setUp();
+        $this->user = User::factory()->create();
+    }
+
     public function test_home_page_contains_empty_table(): void
     {
         // arrange
-        $user = $this->createUser();
+        // $user = $this->createUser();
 
         // act
-        $response = $this->actingAs($user)->get('/products');
+        $response = $this->actingAs($this->user)->get('/products');
 
         $response->assertSee(__('No records found'));
         $response->assertStatus(200);
@@ -29,14 +36,14 @@ class ProductsTest extends TestCase
     public function test_home_page_contains_non_empty_table(): void
     {
         // arrange
-        $user = $this->createUser();
+        // $user = $this->createUser();
         $product = Product::query()->create([
             "name" => "Product 1",
             "price" => 100
         ]);
 
         // act
-        $response = $this->actingAs($user)->get('/products');
+        $response = $this->actingAs($this->user)->get('/products');
 
         // assert
         $response->assertViewHas('products', function ($collection) use ($product) {
@@ -49,12 +56,12 @@ class ProductsTest extends TestCase
     public function test_paginated_products_table_doesnt_contains_11th_records()
     {
         // arrange
-        $user = $this->createUser();
+        // $user = $this->createUser();
         $products = Product::factory(11)->create();
         $lastProduct = $products->last();
 
         // act
-        $response = $this->actingAs($user)->get('/products');
+        $response = $this->actingAs($this->user)->get('/products');
 
         // assert
         $response->assertStatus(200);
@@ -63,7 +70,7 @@ class ProductsTest extends TestCase
         });
     }
 
-    private function createUser () {
+    private function createUser (): User {
         return User::factory()->create();
     }
 }
