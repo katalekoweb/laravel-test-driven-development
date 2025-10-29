@@ -10,13 +10,18 @@ class ProductController extends Controller
 {
     public function index()
     {
-        //
+        return Product::all();
     }
 
 
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => ['required', 'string', 'min:3'],
+            'price' => ['required', 'numeric']
+        ]);
+
+        return Product::create($data);
     }
 
     public function show(Product $product)
