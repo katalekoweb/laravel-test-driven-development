@@ -21,7 +21,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $product = new Product();
+        return view("products.form", compact("product"));
     }
 
     /**
@@ -29,38 +30,54 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => ['required', 'string', 'min:3'],
+            'price' => ['required', 'numeric']
+        ]);
+
+        $product = Product::create($data);
+
+        return redirect(route('products.index'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Product $product)
     {
-        //
+        return view("products.form", compact("product"));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+        return view("products.form", compact("product"));
     }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $data = $request->validate([
+            'name' => ['required', 'string', 'min:3'],
+            'price' => ['required', 'numeric']
+        ]);
+
+        $product->update($data);
+
+        return redirect(route('products.index'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect(route('products.index'));
     }
 }
