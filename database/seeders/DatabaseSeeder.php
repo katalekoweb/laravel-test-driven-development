@@ -21,20 +21,20 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'admin@admin.com',
-            'is_admin' => true
+            'is_admin' => true,
         ]);
 
         User::factory()->create([
             'name' => 'Test User',
-            'email' => 'user@user.com'
+            'email' => 'user@user.com',
         ]);
 
-        for ($i=0; $i < 11; $i++) { 
+        for ($i = 0; $i < 11; $i++) {
             Product::query()->create([
                 'name' => "Product $i",
-                'price' => rand(100, 999)
+                'price' => rand(100, 999),
             ]);
         }
-        
+
     }
 }

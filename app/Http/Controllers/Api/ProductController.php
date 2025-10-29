@@ -13,12 +13,11 @@ class ProductController extends Controller
         return Product::all();
     }
 
-
     public function store(Request $request)
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'min:3'],
-            'price' => ['required', 'numeric']
+            'price' => ['required', 'numeric'],
         ]);
 
         return Product::create($data);

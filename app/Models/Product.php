@@ -17,7 +17,8 @@ class Product extends Model
         'available',
     ];
 
-    public function getPriceEurAttribute () {
+    public function getPriceEurAttribute()
+    {
         return (new CurrencyService)->convert($this->price, 'usd', 'eur');
     }
 }

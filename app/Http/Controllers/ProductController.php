@@ -13,7 +13,8 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::paginate(10);
-        return view("products.index", compact("products"));
+
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -21,8 +22,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $product = new Product();
-        return view("products.form", compact("product"));
+        $product = new Product;
+
+        return view('products.form', compact('product'));
     }
 
     /**
@@ -32,7 +34,7 @@ class ProductController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'min:3'],
-            'price' => ['required', 'numeric']
+            'price' => ['required', 'numeric'],
         ]);
 
         $product = Product::create($data);
@@ -45,7 +47,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view("products.form", compact("product"));
+        return view('products.form', compact('product'));
     }
 
     /**
@@ -53,9 +55,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view("products.form", compact("product"));
+        return view('products.form', compact('product'));
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -64,7 +65,7 @@ class ProductController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'min:3'],
-            'price' => ['required', 'numeric']
+            'price' => ['required', 'numeric'],
         ]);
 
         $product->update($data);
@@ -78,6 +79,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
+
         return redirect(route('products.index'));
     }
 }

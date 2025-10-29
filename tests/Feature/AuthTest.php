@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class AuthTest extends TestCase
@@ -21,17 +20,16 @@ class AuthTest extends TestCase
         $response->assertRedirect('login');
     }
 
-    public function test_login_redirects_to_products () {
-        $user = User::factory(1)->create(['email' => "user@user.com"])->first();
+    public function test_login_redirects_to_products()
+    {
+        $user = User::factory(1)->create(['email' => 'user@user.com'])->first();
 
-        $response = $this->post("/login", [
+        $response = $this->post('/login', [
             'email' => 'user@user.com',
-            'password' => 'password'
+            'password' => 'password',
         ]);
 
         $response->assertStatus(302);
         $response->assertRedirect('products');
     }
-
-    
 }
